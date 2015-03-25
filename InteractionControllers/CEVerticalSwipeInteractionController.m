@@ -68,9 +68,9 @@
         case UIGestureRecognizerStateChanged: {
             if (self.interactionInProgress) {
                 // compute the current position
-                CGFloat fraction = fabsf(translation.y / 200.0);
+                CGFloat fraction = fabsf(translation.y / 500.0);
                 fraction = fminf(fmaxf(fraction, 0.0), 1.0);
-                _shouldCompleteTransition = (fraction > 0.5);
+                _shouldCompleteTransition = (fraction > 0.4);
                 
                 // if an interactive transitions is 100% completed via the user interaction, for some reason
                 // the animation completion block is not called, and hence the transition is not completed.

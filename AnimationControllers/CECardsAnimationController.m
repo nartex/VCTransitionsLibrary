@@ -38,7 +38,6 @@
     CATransform3D t2 = [self secondTransformWithView:fromView];
     
     [UIView animateKeyframesWithDuration:self.duration delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeCubic animations:^{
-        
         // push the from- view to the back
         [UIView addKeyframeWithRelativeStartTime:0.0f relativeDuration:0.4f animations:^{
             fromView.layer.transform = t1;
@@ -47,7 +46,7 @@
         [UIView addKeyframeWithRelativeStartTime:0.2f relativeDuration:0.4f animations:^{
             fromView.layer.transform = t2;
         }];
-
+        
         // slide the to- view upwards. In his original implementation Tope used a 'spring' animation, however
         // this does not work with keyframes, so we siulate it by overshooting the final location in
         // the first keyframe
@@ -57,7 +56,7 @@
         [UIView addKeyframeWithRelativeStartTime:0.8f relativeDuration:0.2f animations:^{
             toView.frame = frame;
         }];
-
+        
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
@@ -73,8 +72,8 @@
     CGRect frame = [transitionContext initialFrameForViewController:fromVC];
     toView.frame = frame;
     CATransform3D scale = CATransform3DIdentity;
-    toView.layer.transform = CATransform3DScale(scale, 0.6, 0.6, 1);
-    toView.alpha = 0.6;
+    toView.layer.transform = CATransform3DScale(scale, 0.9, 0.9, 1);
+    toView.alpha = 0.8;
     
     [containerView insertSubview:toView belowSubview:fromView];
     
@@ -109,9 +108,9 @@
 
 -(CATransform3D)firstTransform{
     CATransform3D t1 = CATransform3DIdentity;
-    t1.m34 = 1.0/-900;
-    t1 = CATransform3DScale(t1, 0.95, 0.95, 1);
-    t1 = CATransform3DRotate(t1, 15.0f * M_PI/180.0f, 1, 0, 0);
+    t1.m34 = 1.0/-1600;
+    t1 = CATransform3DScale(t1, 0.98, 0.98, 1);
+    t1 = CATransform3DRotate(t1, 6.0f * M_PI/180.0f, 1, 0, 0);
     return t1;
     
 }
@@ -120,8 +119,8 @@
     
     CATransform3D t2 = CATransform3DIdentity;
     t2.m34 = [self firstTransform].m34;
-    t2 = CATransform3DTranslate(t2, 0, view.frame.size.height*-0.08, 0);
-    t2 = CATransform3DScale(t2, 0.8, 0.8, 1);
+    t2 = CATransform3DTranslate(t2, 0, view.frame.size.height*-0.02, 0);
+    t2 = CATransform3DScale(t2, 0.9, 0.9, 1);
     
     return t2;
 }
